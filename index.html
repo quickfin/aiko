@@ -4,128 +4,795 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI ROBOT</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #fff;
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: #fff;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 30px;
+            height: 30px;
+            margin-right: 8px;
+        }
+
+        .logo h1 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .app-btn, .chat-btn, .lang-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ff9800;
+            border-radius: 20px;
+            color: #ff9800;
+            background: transparent;
+            padding: 5px 12px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .app-btn i, .lang-btn i {
+            margin-right: 5px;
+        }
+
+        .chat-btn {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            border-radius: 12px;
+            margin: 0 16px;
+            width: calc(100% - 32px);
+        }
+
+        .hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sound-icon {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding: 20px 16px;
+        }
+
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-icon i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .action-item span {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Account Cards */
+        .account-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 0 16px 20px;
+        }
+
+        .card {
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .total-assets {
+            background: linear-gradient(135deg, #fff8f1, #ffe9d4);
+        }
+
+        .quantitative {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        }
+
+        .card h3 {
+            font-size: 14px;
+            font-weight: normal;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .card .amount {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff9800;
+            margin-bottom: 4px;
+        }
+
+        .card .amount span {
+            font-size: 16px;
+        }
+
+        .card .conversion {
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* Withdrawal Record */
+        .withdrawal-section {
+            padding: 0 16px 20px;
+            background-color: #fff;
+            border-radius: 16px;
+            margin: 0 16px 20px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: #ff9800;
+        }
+
+        .withdrawal-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .withdrawal-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .withdrawal-item:last-child {
+            border-bottom: none;
+        }
+
+        .withdrawal-item .user {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .withdrawal-item .amount {
+            font-size: 14px;
+            color: #ff9800;
+            font-weight: bold;
+        }
+
+        /* Statistics */
+        .statistics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 0 16px 20px;
+        }
+
+        .stat-card {
+            background-color: #fff;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            font-weight: normal;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff9800;
+        }
+
+        .stat-card .stat-value span {
+            font-size: 16px;
+            margin-left: 2px;
+        }
+
+        /* Financial Institutions */
+        .institutions-section {
+            padding: 0 16px 20px;
+        }
+
+        .institutions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .institution {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .institution img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-bottom: 6px;
+        }
+
+        .institution span {
+            font-size: 12px;
+            color: #666;
+            display: none; /* Hide text labels as they're not in the screenshot */
+        }
+
+        /* Price Ticker */
+        .price-ticker {
+            padding: 0 16px 20px;
+        }
+
+        .ticker-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .coin-logo {
+            width: 32px;
+            height: 32px;
+            margin-right: 8px;
+        }
+
+        .coin-name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .coin-name span {
+            font-weight: normal;
+            color: #666;
+        }
+
+        .ticker-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .exchange-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .exchange {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .exchange img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+
+        .exchange span {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #22c55e;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            border-top: 1px solid #f0f0f0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #999;
+            font-size: 12px;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: #ff9800;
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 80px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ff9800;
+            color: #fff;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
+    <!-- Add this right after the opening <body> tag but before the container div -->
+<div id="recharge-page" class="page" style="display: none;">
+    <header class="recharge-header">
+        <button class="back-button">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <h1>Recharge</h1>
+    </header>
+    <div class="recharge-options">
+        <div class="recharge-option">
+            <div class="option-left">
+                <div class="coin-icon bnb">
+                    <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#f3ba2f"/>
+                        <path d="M15.52 20L20 15.52 24.48 20 20 24.48 15.52 20zM20 10.48L10.48 20 20 29.52 29.52 20 20 10.48z" fill="#fff"/>
+                    </svg>
+                </div>
+                <span>BNB</span>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="recharge-option">
+            <div class="option-left">
+                <div class="coin-icon usdt">
+                    <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#26A17B"/>
+                        <path d="M20 28c-4.4183 0-8-3.5817-8-8s3.5817-8 8-8 8 3.5817 8 8-3.5817 8-8 8z" fill="#fff"/>
+                    </svg>
+                </div>
+                <span>BEP20-USDT</span>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="recharge-option">
+            <div class="option-left">
+                <div class="coin-icon trx">
+                    <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#FF0013"/>
+                        <path d="M20 12l8 8-8 8-8-8z" fill="#fff"/>
+                    </svg>
+                </div>
+                <span>TRX</span>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="recharge-option">
+            <div class="option-left">
+                <div class="coin-icon usdt">
+                    <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#26A17B"/>
+                        <path d="M20 28c-4.4183 0-8-3.5817-8-8s3.5817-8 8-8 8 3.5817 8 8-3.5817 8-8 8z" fill="#fff"/>
+                    </svg>
+                </div>
+                <span>TRC20-USDT</span>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="recharge-option">
+            <div class="option-left">
+                <div class="coin-icon usdc">
+                    <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#2775CA"/>
+                        <path d="M20 28c-4.4183 0-8-3.5817-8-8s3.5817-8 8-8 8 3.5817 8 8-3.5817 8-8 8z" fill="#fff"/>
+                    </svg>
+                </div>
+                <span>BEP20-USDC</span>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Add this CSS in the existing <style> tag -->
+<style>
+/* Add these styles to the existing <style> section */
+.page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 1000;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.recharge-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fff;
+    position: sticky;
+    top: 0;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    padding: 8px;
+    margin-right: 16px;
+    cursor: pointer;
+    color: #333;
+}
+
+.recharge-header h1 {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.recharge-options {
+    padding: 16px;
+}
+
+.recharge-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+}
+
+.recharge-option:last-child {
+    border-bottom: none;
+}
+
+.option-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.coin-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.recharge-option span {
+    font-size: 16px;
+    color: #333;
+}
+
+.recharge-option i {
+    color: #999;
+}
+
+/* Animation classes */
+.slide-in {
+    animation: slideIn 0.3s forwards;
+}
+
+.slide-out {
+    animation: slideOut 0.3s forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+</style>
+
+<!-- Add this JavaScript right before the closing </body> tag -->
+<script>
+// Add this to the existing JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const mainContainer = document.querySelector('.container');
+    const rechargePage = document.getElementById('recharge-page');
+    const rechargeAction = document.querySelector('.action-item:first-child');
+    const backButton = document.querySelector('.back-button');
+
+    // Show recharge page
+    rechargeAction.addEventListener('click', function() {
+        rechargePage.style.display = 'block';
+        rechargePage.classList.add('slide-in');
+        mainContainer.style.display = 'none';
+    });
+
+    // Hide recharge page
+    backButton.addEventListener('click', function() {
+        rechargePage.classList.remove('slide-in');
+        rechargePage.classList.add('slide-out');
+        setTimeout(() => {
+            rechargePage.style.display = 'none';
+            rechargePage.classList.remove('slide-out');
+            mainContainer.style.display = 'block';
+        }, 300);
+    });
+
+    // Add click effect to recharge options
+    const rechargeOptions = document.querySelectorAll('.recharge-option');
+    rechargeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            this.style.backgroundColor = '#f5f5f5';
+            setTimeout(() => {
+                this.style.backgroundColor = '';
+            }, 100);
+        });
+    });
+});
+</script>
+    <div class="container">
         <!-- Header -->
-        <header class="header">
+        <header>
             <div class="logo">
-                <img src="images/logo.png" alt="AI ROBOT">
+                <svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ff7eb3;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ff758c;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="45" fill="url(#grad)" />
+                    <path d="M50 20C33.431 20 20 33.431 20 50c0 16.569 13.431 30 30 30 16.569 0 30-13.431 30-30C80 33.431 66.569 20 50 20zm0 55c-13.807 0-25-11.193-25-25S36.193 25 50 25s25 11.193 25 25-11.193 25-25 25z" fill="#fff" />
+                    <path d="M65 45c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5zm-30 0c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5z" fill="#fff" />
+                    <path d="M50 65c-8.284 0-15-6.716-15-15h5c0 5.523 4.477 10 10 10s10-4.477 10-10h5c0 8.284-6.716 15-15 15z" fill="#fff" />
+                </svg>
                 <h1>AI ROBOT</h1>
             </div>
-            <div class="header-buttons">
-                <a href="#" class="app-btn">
+            <div class="header-actions">
+                <button class="app-btn">
                     <i class="fas fa-mobile-alt"></i>
                     App
-                </a>
-                <a href="#" class="chat-btn">
-                    <i class="fas fa-comment-dots"></i>
-                </a>
-                <div class="language-selector">
-                    <a href="#" class="lang-btn">
-                        <i class="fas fa-globe"></i>
-                        English
-                    </a>
-                </div>
+                </button>
+                <button class="chat-btn">
+                    <i class="fas fa-comment"></i>
+                </button>
+                <button class="lang-btn">
+                    <i class="fas fa-globe"></i>
+                    English
+                </button>
             </div>
         </header>
 
         <!-- Hero Banner -->
         <div class="hero-banner">
-            <img src="images/ai-robot-banner.jpg" alt="AI Robot Analytics">
-        </div>
-
-        <!-- Quick Actions Grid -->
-        <div class="quick-actions">
-            <div class="quick-action-grid">
-                <a href="#" class="quick-action-item">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-wallet"></i>
-                    </div>
-                    <span>Recharge</span>
-                </a>
-                <a href="#" class="quick-action-item">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-money-bill-transfer"></i>
-                    </div>
-                    <span>Withdraw</span>
-                </a>
-                <a href="#" class="quick-action-item">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <span>Help</span>
-                </a>
-                <a href="#" class="quick-action-item">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <span>Team</span>
-                </a>
-                <a href="#" class="quick-action-item">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <span>Activity</span>
-                </a>
-                <a href="#" class="quick-action-item">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-user-plus"></i>
-                    </div>
-                    <span>Invite Friends</span>
-                </a>
-                <a href="#" class="quick-action-item">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <span>Agent Cooperation</span>
-                </a>
-                <a href="#" class="quick-action-item">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <span>News</span>
-                </a>
+            <svg width="100%" height="100%" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#6a11cb;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#2575fc;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <rect width="600" height="200" fill="url(#grad1)" />
+                <circle cx="150" cy="100" r="60" fill="#ffffff" fill-opacity="0.2" />
+                <rect x="300" y="50" width="200" height="100" fill="#ffffff" fill-opacity="0.1" />
+                <path d="M150,60 C180,60 180,140 150,140 C120,140 120,60 150,60" fill="#ffffff" fill-opacity="0.3" />
+                <text x="300" y="100" font-family="Arial" font-size="24" fill="#ffffff">AI Robot Analytics</text>
+                <line x1="50" y1="150" x2="250" y2="150" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2" />
+                <line x1="300" y1="70" x2="480" y2="70" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2" />
+                <line x1="300" y1="90" x2="450" y2="90" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2" />
+                <line x1="300" y1="110" x2="470" y2="110" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2" />
+                <line x1="300" y1="130" x2="440" y2="130" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2" />
+            </svg>
+            <div class="sound-icon">
+                <i class="fas fa-volume-up"></i>
             </div>
         </div>
 
-        <!-- Account Overview -->
-        <div class="account-overview">
-            <div class="account-card total-assets">
-                <h3>Total Assets</h3>
-                <div class="amount">
-                    <span class="value">5555</span>
-                    <span class="currency">USDT</span>
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fas fa-wallet"></i>
                 </div>
+                <span>Recharge</span>
+            </div>
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <span>Withdraw</span>
+            </div>
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <span>Help</span>
+            </div>
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <span>Team</span>
+            </div>
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <span>Activity</span>
+            </div>
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <span>Invite Friends</span>
+            </div>
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <span>Agent Cooperation</span>
+            </div>
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <span>News</span>
+            </div>
+        </div>
+
+        <!-- Account Cards -->
+        <div class="account-cards">
+            <div class="card total-assets">
+                <h3>Total Assets</h3>
+                <div class="amount">5555 <span>USDT</span></div>
                 <div class="conversion">≈ $ 5555</div>
             </div>
-            <div class="account-card quantitative">
+            <div class="card quantitative">
                 <h3>Quantitative Account</h3>
-                <div class="amount">
-                    <span class="value">0.00</span>
-                    <span class="currency">USDT</span>
-                </div>
+                <div class="amount">0.00 <span>USDT</span></div>
                 <div class="conversion">≈ $ 0.00</div>
             </div>
         </div>
 
         <!-- Withdrawal Record -->
-        <div class="withdrawal-record">
+        <div class="withdrawal-section">
             <h2 class="section-title">Withdrawal Record</h2>
-            <div class="record-list">
-                <div class="record-item">
-                    <span class="email">o***35xd0@outlook.com</span>
-                    <span class="amount">+$815141.34</span>
+            <div class="withdrawal-list">
+                <div class="withdrawal-item">
+                    <div class="user">o***35xd0@outlook.com</div>
+                    <div class="amount">+$815141.34</div>
                 </div>
-                <div class="record-item">
-                    <span class="phone">+01****07</span>
-                    <span class="amount">+$393855.99</span>
+                <div class="withdrawal-item">
+                    <div class="user">+01****07</div>
+                    <div class="amount">+$393855.99</div>
                 </div>
-                <div class="record-item">
-                    <span class="phone">+19****95</span>
-                    <span class="amount">+$2119154.11</span>
+                <div class="withdrawal-item">
+                    <div class="user">+19****95</div>
+                    <div class="amount">+$2119154.11</div>
                 </div>
             </div>
         </div>
@@ -134,86 +801,151 @@
         <div class="statistics">
             <div class="stat-card">
                 <h3>Safe Operation</h3>
-                <div class="stat-value">
-                    <span class="number">387</span>
-                    <span class="unit">Day</span>
-                </div>
+                <div class="stat-value">387<span>Day</span></div>
             </div>
             <div class="stat-card">
                 <h3>Cumulative Income</h3>
-                <div class="stat-value">
-                    <span class="number">547762148</span>
-                    <span class="unit">USDT</span>
-                </div>
+                <div class="stat-value">547762148<span>USDT</span></div>
             </div>
         </div>
 
-        <!-- Exchange Partners -->
-        <div class="exchange-partners">
+        <!-- Financial Institutions -->
+        <div class="institutions-section">
             <h2 class="section-title">Core Cooperative Financial Institutions</h2>
-            <div class="partners-grid">
-                <div class="partner-logo">
-                    <img src="images/binance.png" alt="Binance">
+            <div class="institutions-grid">
+                <div class="institution">
+                    <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#f3ba2f" />
+                        <path d="M15.52 20L20 15.52 24.48 20 20 24.48 15.52 20zM20 10.48L10.48 20 20 29.52 29.52 20 20 10.48z" fill="#fff" />
+                        <path d="M25 25l4.52 4.52-4.52 4.52-4.52-4.52L25 25z" fill="#fff" />
+                        <path d="M15 25l-4.52 4.52L15 34.04l4.52-4.52L15 25z" fill="#fff" />
+                        <path d="M15 15l-4.52-4.52L15 5.96l4.52 4.52L15 15z" fill="#fff" />
+                        <path d="M25 15l4.52-4.52L25 5.96l-4.52 4.52L25 15z" fill="#fff" />
+                    </svg>
+                    <span>Binance</span>
                 </div>
-                <div class="partner-logo">
-                    <img src="images/kraken.png" alt="Kraken">
+                <div class="institution">
+                    <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#5741d9" />
+                        <path d="M12 14h16v12H12z" fill="#fff" />
+                        <path d="M16 18h8v4H16z" fill="#5741d9" />
+                    </svg>
+                    <span>Kraken</span>
                 </div>
-                <div class="partner-logo">
-                    <img src="images/kucoin.png" alt="KuCoin">
+                <div class="institution">
+                    <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#0093dd" />
+                        <rect x="14" y="10" width="12" height="20" rx="2" fill="#fff" />
+                        <rect x="16" y="12" width="8" height="16" rx="1" fill="#0093dd" />
+                    </svg>
+                    <span>KuCoin</span>
                 </div>
-                <div class="partner-logo">
-                    <img src="images/coinbase.png" alt="Coinbase">
+                <div class="institution">
+                    <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#0052ff" />
+                        <circle cx="20" cy="20" r="8" fill="#fff" />
+                    </svg>
+                    <span>Coinbase</span>
                 </div>
-                <div class="partner-logo">
-                    <img src="images/okx.png" alt="OKX">
+                <div class="institution">
+                    <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#000" />
+                        <circle cx="14" cy="14" r="6" fill="#fff" />
+                        <circle cx="26" cy="14" r="6" fill="#fff" />
+                        <circle cx="14" cy="26" r="6" fill="#fff" />
+                        <circle cx="26" cy="26" r="6" fill="#fff" />
+                    </svg>
+                    <span>OKX</span>
                 </div>
-                <div class="partner-logo">
-                    <img src="images/bitstamp.png" alt="Bitstamp">
+                <div class="institution">
+                    <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#1b3144" />
+                        <path d="M12 16h16v8H12z" fill="#fff" />
+                        <path d="M14 18h12v4H14z" fill="#1b3144" />
+                    </svg>
+                    <span>Bitstamp</span>
                 </div>
-                <div class="partner-logo">
-                    <img src="images/bitfinex.png" alt="Bitfinex">
+                <div class="institution">
+                    <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#16b157" />
+                        <path d="M12 12h16v16H12z" fill="#fff" />
+                        <path d="M14 14h12v12H14z" fill="#16b157" />
+                    </svg>
+                    <span>Bitfinex</span>
                 </div>
-                <div class="partner-logo">
-                    <img src="images/bybit.png" alt="Bybit">
+                <div class="institution">
+                    <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#ffd800" />
+                        <path d="M12 12h16v16H12z" fill="#fff" />
+                        <path d="M14 14h12v12H14z" fill="#ffd800" />
+                    </svg>
+                    <span>Bybit</span>
                 </div>
-                <div class="partner-logo">
-                    <img src="images/gate.png" alt="Gate.io">
+                <div class="institution">
+                    <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#2354e6" />
+                        <circle cx="20" cy="20" r="10" fill="#fff" />
+                        <circle cx="20" cy="20" r="6" fill="#2354e6" />
+                    </svg>
+                    <span>Gate.io</span>
                 </div>
             </div>
         </div>
 
-        <!-- Price Ticker -->
+        <!-- BNB Price Ticker -->
         <div class="price-ticker">
             <div class="ticker-header">
-                <img src="images/bnb.png" alt="BNB" class="coin-icon">
-                <span class="coin-name">BNB</span>
-                <span class="pair">/USDT</span>
+                <svg width="32" height="32" viewBox="0 0 40 40" class="coin-logo" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="20" fill="#f3ba2f" />
+                    <path d="M15.52 20L20 15.52 24.48 20 20 24.48 15.52 20zM20 10.48L10.48 20 20 29.52 29.52 20 20 10.48z" fill="#fff" />
+                </svg>
+                <div class="coin-name">BNB <span>/USDT</span></div>
             </div>
             <div class="ticker-grid">
-                <div class="exchange-price">
-                    <div class="exchange-info">
-                        <img src="images/binance.png" alt="BINANCE">
+                <div class="exchange-card">
+                    <div class="exchange">
+                        <svg width="24" height="24" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="20" fill="#f3ba2f" />
+                            <path d="M15.52 20L20 15.52 24.48 20 20 24.48 15.52 20zM20 10.48L10.48 20 20 29.52 29.52 20 20 10.48z" fill="#fff" />
+                            <path d="M25 25l4.52 4.52-4.52 4.52-4.52-4.52L25 25z" fill="#fff" />
+                            <path d="M15 25l-4.52 4.52L15 34.04l4.52-4.52L15 25z" fill="#fff" />
+                            <path d="M15 15l-4.52-4.52L15 5.96l4.52 4.52L15 15z" fill="#fff" />
+                            <path d="M25 15l4.52-4.52L25 5.96l-4.52 4.52L25 15z" fill="#fff" />
+                        </svg>
                         <span>BINANCE</span>
                     </div>
                     <div class="price">$551.82</div>
                 </div>
-                <div class="exchange-price">
-                    <div class="exchange-info">
-                        <img src="images/okx.png" alt="OKX">
+                <div class="exchange-card">
+                    <div class="exchange">
+                        <svg width="24" height="24" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="20" fill="#000" />
+                            <circle cx="14" cy="14" r="6" fill="#fff" />
+                            <circle cx="26" cy="14" r="6" fill="#fff" />
+                            <circle cx="14" cy="26" r="6" fill="#fff" />
+                            <circle cx="26" cy="26" r="6" fill="#fff" />
+                        </svg>
                         <span>OKX</span>
                     </div>
                     <div class="price">$551.76</div>
                 </div>
-                <div class="exchange-price">
-                    <div class="exchange-info">
-                        <img src="images/huobi.png" alt="HUOBI">
+                <div class="exchange-card">
+                    <div class="exchange">
+                        <svg width="24" height="24" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="20" fill="#2a3867" />
+                            <path d="M12 16c0-4.418 3.582-8 8-8s8 3.582 8 8v8c0 4.418-3.582 8-8 8s-8-3.582-8-8v-8z" fill="#fff" />
+                            <path d="M16 20c0-2.209 1.791-4 4-4s4 1.791 4 4-1.791 4-4 4-4-1.791-4-4z" fill="#2a3867" />
+                        </svg>
                         <span>HUOBI</span>
                     </div>
                     <div class="price">$551.75</div>
                 </div>
-                <div class="exchange-price">
-                    <div class="exchange-info">
-                        <img src="images/coinbase.png" alt="COINBASE">
+                <div class="exchange-card">
+                    <div class="exchange">
+                        <svg width="24" height="24" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="20" fill="#0052ff" />
+                            <circle cx="20" cy="20" r="8" fill="#fff" />
+                        </svg>
                         <span>COINBASE</span>
                     </div>
                     <div class="price">$551.82</div>
@@ -246,11 +978,76 @@
         </nav>
 
         <!-- Back to Top Button -->
-        <button id="back-to-top" class="back-to-top">
+        <button id="back-to-top">
             <i class="fas fa-arrow-up"></i>
         </button>
     </div>
 
-    <script src="js/app.js"></script>
+    <script>
+        // DOM Elements
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        // Show/Hide Back to Top button based on scroll position
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'flex';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        // Scroll to top when button is clicked
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Navigation item click handler
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Remove active class from all items
+                navItems.forEach(nav => nav.classList.remove('active'));
+                // Add active class to clicked item
+                this.classList.add('active');
+            });
+        });
+
+        // Quick action items click handler
+        const actionItems = document.querySelectorAll('.action-item');
+        actionItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Add a subtle animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+
+        // Simulate price updates for the ticker
+        function updatePrices() {
+            const prices = document.querySelectorAll('.price');
+            prices.forEach(price => {
+                const currentPrice = parseFloat(price.textContent.replace('$', ''));
+                // Random small change
+                const change = (Math.random() - 0.5) * 0.1;
+                const newPrice = (currentPrice + change).toFixed(2);
+                price.textContent = `$${newPrice}`;
+            });
+        }
+
+        // Update prices every 3 seconds
+        setInterval(updatePrices, 3000);
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide back to top button initially
+            backToTopBtn.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
